@@ -1,34 +1,37 @@
-import { TurnedInNot } from '@mui/icons-material'
-import { Grid, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import React, { useMemo } from 'react'
-import { useDispatch } from 'react-redux'
-import { setActiveNote } from '../../store/journal/journalSlice'
+import { TurnedInNot } from '@mui/icons-material';
+import { Grid, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import React, { useMemo } from 'react';
+import { useDispatch } from 'react-redux';
+import { setActiveNote } from '../../store/journal/journalSlice';
 
-export const SideBarItem = ({title= '',body,id,date,imageUrl = [] }) => {
+// Componente para cada elemento de la barra lateral
+export const SideBarItem = ({ title = '', body, id, date, imageUrl = [] }) => {
+  const dispatch = useDispatch();
 
-const dispatch = useDispatch()
+  // Maneja el clic en una nota de la barra lateral
+  const onClickNote = () => {
+    dispatch(setActiveNote({ title, body, id, date, imageUrl }));
+  };
 
-  const onclickNote = () =>{
-    dispatch(setActiveNote({title,body,id,date,imageUrl}));
-  }
-
-  const newTitle = useMemo(()=> {
+  // Memoriza el título nuevo para mostrarlo truncado si es muy largo
+  const newTitle = useMemo(() => {
     return title.length > 17
-    ?title.substring(0,17) + '...'
-    :title
-  },[title])
-  
+      ? title.substring(0, 17) + '...'
+      : title;
+  }, [title]);
+
   return (
-    <ListItem  disablePadding>
-    <ListItemButton onClick={onclickNote}>
-      <ListItemIcon>
-        <TurnedInNot/>
-        </ListItemIcon> 
+    <ListItem disablePadding>
+      <ListItemButton onClick={onClickNote}>
+        <ListItemIcon>
+          <TurnedInNot />
+        </ListItemIcon>
         <Grid container>
-            <ListItemText primary={newTitle}/>
-            <ListItemText secondary={body}/>
-        </Grid> 
-    </ListItemButton>
-  </ListItem>  
-  )
-}
+          <ListItemText primary={newTitle} /> {/* Título de la nota */}
+          <ListItemText secondary={body} /> {/* Cuerpo de la nota */}
+        </Grid>
+      </ListItemButton>
+    </ListItem>
+  );
+};
+

@@ -1,22 +1,20 @@
 import { collection } from 'firebase/firestore/lite';
-import React from 'react'
-import { FireBaseDB } from '../firebase/config';
 import { getDocs } from 'firebase/firestore/lite';
-//este componente, va a firestore y me trae todas las notas
-export const loadNotes = async(uid='') => {
-    if (!uid) throw new Error('el uid del usuario no existe');
+import { FireBaseDB } from '../firebase/config';
 
-    const collectionRef = collection(FireBaseDB,`${uid}/journal/notes`)
-    const docs = await getDocs(collectionRef)
+// Función para cargar notas desde Firestore
+export const loadNotes = async(uid = '') => {
+    if (!uid) throw new Error('El UID del usuario no existe'); // Verifica si el UID está presente
 
-    const notes = []
+    const collectionRef = collection(FireBaseDB, `${uid}/journal/notes`); // Referencia a la colección de notas
+    const docs = await getDocs(collectionRef); // Obtiene los documentos de la colección
 
-    docs.forEach(doc=>{
-        // console.log(doc.data()) aqui se ven los id y las notas
-        notes.push({id:doc.id,...doc.data()})
-    })
-        console.log(notes)
-        return notes
-    
+    const notes = [];
 
-}
+    docs.forEach(doc => {
+        // Agrega cada nota al arreglo de notas con su ID
+        notes.push({ id: doc.id, ...doc.data() });
+    });
+
+    return notes; // Devuelve las notas
+};

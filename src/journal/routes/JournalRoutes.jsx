@@ -1,12 +1,16 @@
-import React from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
-import { JournalPage } from '../pages/JournalPage'
+import React from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { JournalPage } from '../pages/JournalPage';
 
+// Componente que define las rutas para la aplicación de diario
 export const JournalRoutes = () => {
   return (
     <Routes>
-        <Route path='/' element={<JournalPage/>}/>
-        <Route path='/*' element={<Navigate to='/'/>}/>
+      {/* Ruta principal para la página de diario */}
+      <Route path='/' element={<JournalPage />} />
+      {/* Redirige a la página principal si la ruta no coincide */}
+      <Route path='/*' element={<Navigate to='/' />} />
     </Routes>
-  )
-}
+  );
+};
+

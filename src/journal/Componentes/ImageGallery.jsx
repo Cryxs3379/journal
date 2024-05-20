@@ -2,6 +2,7 @@ import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
+// Componente para mostrar una galería de imágenes
 export const ImageGallery = () => {
   return (
     <ImageList sx={{ width: '100%', height: 500 }} cols={4} rowHeight={164}>
@@ -19,6 +20,7 @@ export const ImageGallery = () => {
   );
 }
 
+// Datos de ejemplo para las imágenes de la galería
 const itemData = [
   {
     img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
